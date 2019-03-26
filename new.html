@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>new运算符</title>
+		<script src="jquery-3.1.1.min.js"></script>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+	//　new是用来做继承的 
+//	function WY(name,age){
+//		this.name = name;
+//		this.age = age;
+//		this.salary = '30k';
+//	}
+//	WY.prototype.ablility = 100;
+//	WY.prototype.sayYourName = function(){
+//		console.log('I am ' + this.name);
+//	}
+//	var person = new WY('盖伦',25);
+//	console.log(person.name);
+//	console.log(person.age)
+//	console.log(person.salary)
+//	console.log(person.ablility)
+//	person.sayYourName();
+
+	//1.访问到wy构造函数里面的属性
+	//2.访问到wy原型上的属性
+	
+	//解决问题　1 访问到wy构造函数里面的属性
+//	function Parent(){
+//		this.names = ['A','B'];
+//	}
+//	
+//	function Child(){
+//		Parent.call(this)
+//	}
+//	var child1 = new Child();
+//	child1.names.push('C');
+//	console.log(child1.names);
+
+
+//	解决问题 2 访问到wy原型上的属性
+// __proto__　用原型链来解决
+
+	function WY(name,age){
+		this.name = name;
+		this.age = age;
+		this.salary = '30k';
+	}
+	WY.prototype.ablility = 100;
+	WY.prototype.sayYourName = function(){
+		console.log('I am ' + this.name);
+	}
+	var person = new Wnew(WY,'盖伦',25);
+	
+	console.log(person.name);
+	console.log(person.age)
+	console.log(person.salary)
+	console.log(person.ablility)
+	person.sayYourName();
+
+	//网易的new 实现
+   function Wnew(){
+   	var obj = {};
+   	Constructor = [].shift.call(arguments);//获取arguments 第一个参数
+// 	console.log(Constructor)
+	obj.__proto__ = Constructor.prototype;//把WY函数的原型赋值给obj
+	Constructor.apply(obj,arguments);//arguments里面有２个参数
+	
+	return obj;
+
+   }
+   
+   // 五个步骤
+   //1.创建一个空对象
+   //2.获取arguments 第一个参数，arguments会少一个参数
+   //3.将obj的原型链指向构造函数
+   //4.使用apply改变函数this的指向　　指向于新对象　　　这样之后obj就可以访问到构造函数中的属性和方法
+   //5.返回obj对象
+   
+	
+	
+</script>
